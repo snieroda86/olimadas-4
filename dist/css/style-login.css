@@ -1,0 +1,50 @@
+body.login {
+	background: #fff;
+	/*#b37f2b*/
+}
+body.login div#login {}
+body.login div#login h1 {}
+body.login div#login h1 a {}
+body.login div#login form#loginform {}
+body.login div#login form#loginform p {}
+body.login div#login form#loginform p label {}
+
+body.login div#login form#loginform input:not([type=checkbox]) , 
+body.login div#login form#registerform input:not([type=checkbox]) ,
+body.login div#login form#lostpasswordform input:not([type=checkbox])
+
+{
+	border-radius: 0 !important;
+	height: 45px;
+	border: 1px solid #ddd;
+	/*outline: none;*/
+	box-shadow: none;
+}
+body.login div#login  p.message{
+	border-left: 4px solid #b37f2b;
+}
+body.login div#login form#loginform input[type="submit"] , 
+body.login div#login form#registerform input[type="submit"] ,
+body.login div#login form#lostpasswordform input[type="submit"]
+{
+	background: #b37f2b ;
+}
+body.login div#login form#loginform input#user_login {}
+body.login div#login form#loginform input#user_pass {}
+body.login div#login form#loginform p.forgetmenot {}
+body.login div#login form#loginform p.forgetmenot input#rememberme {}
+body.login div#login form#loginform p.submit {}
+body.login div#login form#loginform p.submit input#wp-submit {}
+body.login div#login p#nav {
+	/*color: #fff;*/
+	font-size: 16px;
+}
+body.login div#login p#nav a {
+	/*color: #fff;*/
+	font-size: 16px;
+}
+body.login div#login p#backtoblog {}
+body.login div#login p#backtoblog a {
+	/*color: #fff;*/
+	font-size: 16px;
+}

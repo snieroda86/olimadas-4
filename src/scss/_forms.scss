@@ -1,0 +1,34 @@
+form.one-line-border-form input:not([type="submit"]):not([type="file"]) ,form.one-line-border-form select {
+  border: none !important;
+  border-bottom: 1px solid $light-grey !important;
+  box-shadow: none !important; 
+  border-radius: 0 !important;
+  outline: none !important;
+}
+
+form.one-line-border-form textarea {
+  border: 1px solid $light-grey !important;
+  box-shadow: none !important; 
+  border-radius: 0 !important;
+  outline: none !important;
+
+}
+form.one-line-border-form label{
+	font-weight: 600; 
+	font-size: 18px;
+}
+form.one-line-border-form input::placeholder{
+	color: $gold;
+}
+form.one-line-border-form input[type="submit"]{
+	border:0 !important;
+	box-shadow:0 !important;
+	padding-left: 25px;
+	padding-right: 25px;
+	max-width: 300px;
+	margin:auto;
+
+}
+ 
+
+   

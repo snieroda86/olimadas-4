@@ -1,0 +1,91 @@
+.pedigree-table{
+	width:100%;
+
+	table{
+		width:100%;
+
+		td{
+			border-spacing: 0;
+			width:20%;
+		}
+		.dog-cell-inner{
+			width:100%;
+			height:100%;
+			@include el-center;
+			padding:2px;
+			box-sizing: border-box;
+
+			.dog-cell-card{
+				padding:0 10px;
+				background: #fff;
+
+				a{
+					color:$black;
+					font-weight: 600;
+					font-size: 14px;   
+				}
+			}
+		}
+
+		.dog-cell{
+			width:100%;
+			border-bottom: 1px solid #888; 
+			height:100%;
+			@include el-center;
+
+			.undefined-cell-inner{
+				background: #fff;
+				padding:0 2px;
+				text-align: center;
+				width:100%;
+
+				p{
+					margin-bottom: 0;
+					font-size: 14px;
+				}
+				a{
+					color: $gold;
+					text-decoration: underline;
+					font-weight: 700;
+
+					&::before{
+						font-family: "Font Awesome 5 Free"; 
+						font-weight: 900; 
+						content: "\f055";
+						margin-right: 3px;
+						font-size: 14px;
+					}
+				}
+			}
+ 
+			.undefined-q-mark{
+				p{
+					font-size: 14px; 
+					padding:0 !important;
+					margin:0 !important; 
+				}
+			}
+			
+		} 
+
+		td .dog-cell:last-child {
+			border-bottom: 0;
+		}	    
+
+		.dog-cell-5{
+			height: 35px;
+		}
+		.dog-cell-4{
+			height: 70px;
+		}	 
+		.dog-cell-3{
+			height: 140px;
+		}
+		.dog-cell-2{
+			height: 280px;
+		}
+		.dog-cell-1{
+			height: 560px;
+		}
+	}
+}

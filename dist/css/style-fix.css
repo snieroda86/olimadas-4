@@ -1,0 +1,142 @@
+body{
+	overflow-x: hidden;
+}
+.content-regular-item:hover{
+	/*background: rgba(4,4,4,.05);*/
+	box-shadow: 0px 0px 35px -10px rgba(55, 55, 55, 0.34);
+}
+
+.product-loop-item{
+	transition: 0.6s;
+}
+
+#secondary-post-sn:hover , .featured-post-slider-home:hover , .newsletter-wrap-sn:hover , #main-post-sn:hover {
+	/*background: rgba(4,4,4,.05);*/
+	box-shadow: 0px 0px 35px -10px rgba(55, 55, 55, 0.34);
+}
+
+ .product-loop-item:hover{
+ 	-webkit-box-shadow: 0px 0px 68px -26px rgba(61, 61, 62, 1);
+	-moz-box-shadow: 0px 0px 68px -26px rgba(61, 61, 62, 1);
+	box-shadow: 0px 0px 68px -26px rgba(61, 61, 62, 1);
+ }
+
+.newsletter-wrap-sn , #secondary-post-sn , #main-post-sn , .featured-post-slider-home{
+	transition: 0.6s;
+}
+
+.featured-post-slider-home {
+	margin-bottom: 55px;
+}
+
+.featured-post-slider-home .slick-dots{
+	position: absolute;
+    bottom: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pm-excerpt , .secnd-excerpt{
+	color: #707070;
+}
+.pn-entry-title:hover{
+	text-decoration: underline;
+}
+
+.hot-topics-sidebar-col .newsletter-inner-sn{
+	width: 100%;
+}
+.hot-topics-sidebar-col .newsletter-inner-sn img{
+	max-width: 110%;
+	margin-left: 10px;
+}
+
+.hot-topics-sidebar-col .newsletter-wrap-sn{
+	min-height: 224px;
+	border: 1px solid #ddd;
+}
+
+/*Borders*/
+.content-regular-item , #secondary-post-sn , .press-note-sidebar {
+	border: 1px solid #ddd !important;
+}
+
+.featured-post-slider-home .slick-slide{
+	border: 1px solid #ddd;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.featured-post-slider-home .slick-list{
+	margin-left: -10px;
+	margin-right: -10px;
+}
+#sidebar-sn .newsletter-wrap-sn{
+	border: 1px solid #ddd;	
+}
+#sidebar-sn .press-note-sidebar{
+	margin-bottom: 65px !important;
+}
+
+.wpforms-form input[type="text"] ,
+.wpforms-form input[type="email"] ,
+.wpforms-form textarea{
+	border-radius: 7px !important;
+}
+
+.btn-main-sn , .search-submit , .wpforms-submit{
+	background: #20282e;
+	transition: 0.3s;
+}
+
+.btn-main-sn:hover , .search-submit:hover , .wpforms-submit:hover{
+	background-image: none;
+	background: #fff;
+	border: 2px solid #20282e;
+	/*box-shadow: 0px 6px 24px -5px rgba(55, 55, 55, 0.34);*/
+	color: #20282e;
+}
+.btn-main-sn:hover span{
+	color: #20282e !important;
+	font-weight: 400;
+}
+.wpforms-submit{
+	border: 2px solid #20282e !important;
+}
+.wpforms-submit:hover{
+	background: #fff !important;
+	border: 2px solid #434343 !important;
+	/*box-shadow: 0px 6px 24px -5px rgba(55, 55, 55, 0.34) !important;*/
+	color: #20282e !important;
+}
+.moving-blob-sn{
+	position: absolute;
+	left: 30%;
+	transform: translateX(-50%);
+	top: 120px;
+	max-width: 800px;
+	width: 100%;
+	z-index: -1;
+}
+
+.about-col-blob-2 .moving-blob-sn{
+	position: absolute;
+	left: 10%;
+	transform: translateX(-50%);
+	top: 130px;
+	max-width: 600px;
+	width: 100%;
+}
+.testimonials-wrap-slider{
+	margin-left: -15px;
+	margin-right: -15px;
+
+}
+.testimonials-wrap-slider .slick-list{
+	padding-left: 15px;
+	padding-right: 15px;
+
+}
+.testimonials-slider-sn .slick-slide:hover{
+	box-shadow: 0px 6px 34px -15px rgba(55, 55, 55, 0.24) !important;
+}
