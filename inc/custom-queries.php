@@ -133,12 +133,12 @@ function getPageByTitleSN( $title , $type){
 }
 
 // Get dog by title
-function getDogByTitleSN( $title ){
+function getDogByID( $id ){
 	$args = array(
-	    'post_type'      => 'rodowody_psow',
-	    'post_status'    => 'publish',
-	    'posts_per_page' => 1,
-	    'title'          => $title
+	   'post_type'      => 'rodowody_psow',
+        'post_status'    => 'publish',
+        'posts_per_page' => 1,
+        'p'              => $id 
 	);
 
 	$dog = new WP_Query( $args );

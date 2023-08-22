@@ -64,33 +64,71 @@ get_header();
                         	</tr>
                         	<tr>
                         		<th><?php _e('Sex' , 'web14devsn'); ?></th>
-                        		<td><?php the_field('plec_psa'); ?></td>
+                        		<td><?php 
+                        		if(get_field('plec_psa')){
+                        			the_field('plec_psa');
+                        		} 
+                        		?></td>
                         	</tr>
                         	<tr>
                         		<th><?php _e('SIRE' , 'web14devsn'); ?></th>
-                        		<td><?php the_field('ojciec_sire'); ?></td>
+                        		<td>
+                        			<?php 
+                        			$sire_id = get_field('ojciec_sire'); 
+                        			$sire_obj = get_post($sire_id);
+                        			if($sire_obj){
+                        				echo $sire_obj->post_title;	
+                        			}
+                        			
+                        			?>
+                        				
+                        		</td>
                         	</tr>
                         	<tr>
                         		<th><?php _e('DAM' , 'web14devsn'); ?></th>
-                        		<td><?php the_field('matka_dam'); ?></td>
+                        		<td>
+                        			<?php 
+                        			$matka_id = get_field('matka_dam'); 
+                        			$dam_obj = get_post($matka_id);
+                        			if($dam_obj){
+                        				echo $dam_obj->post_title;
+                        			}
+                        			?>
+                        		</td>
                         	</tr>
                         	<tr>
                         		<th><?php _e('Breeder' , 'web14devsn'); ?></th>
                         		<td>
-                        			<?php the_field('hodowca'); ?>
-                        			<?php if(get_field('breeder_country')): ?>  
-                        			( <?php the_field('breeder_country'); ?> )
-                        			<?php endif; ?> 
+                        			<?php 
+                        			$breeder_id = get_field('hodowca');
+                        			$breeder_obj = get_post($breeder_id);
+                        			if($breeder_obj){
+                        				echo $breeder_obj->post_title;
+                        			}
+                        			
+                        			?>
+
+                        			<?php if (get_field('narodowosc' , $breeder_obj->ID )): ?>
+                        			( <?php the_field('narodowosc' , $breeder_obj->ID); ?>	)
+                        			<?php endif; ?>
+
                         		</td>
                         	</tr>
                         	<tr>
                         		<th><?php _e('Owner' , 'web14devsn'); ?></th>
                         		<td>
-                        			<?php the_field('wlasciciel'); ?> 
-                        			<?php if (get_field('owner_country')): ?>
-                        			( <?php the_field('owner_country'); ?>	)
+                        			<?php 
+                        			$owner_id = get_field('wlasciciel');
+                        			$owner_obj = get_post($owner_id);
+                        			if($owner_obj ){
+                        				echo $owner_obj->post_title;	
+                        			}
+                        			
+                        			?>
+
+                        			<?php if (get_field('narodowosc' , $owner_obj->ID )): ?>
+                        			( <?php the_field('narodowosc' , $owner_obj->ID); ?>	)
                         			<?php endif; ?>
-                        			 
                         		</td>
                         	</tr>
 
@@ -246,7 +284,7 @@ get_header();
 	                    					<?php 
 	                    						$sire_1 = get_field('ojciec_sire');
 	                    						if($sire_1){
-	                    							$get_sire_1 = getDogByTitleSN($sire_1);
+	                    							$get_sire_1 = getDogByID($sire_1);
 	                    							if ( $get_sire_1->have_posts() ) {
 														
 														$dog = $get_sire_1->posts[0];
