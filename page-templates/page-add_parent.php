@@ -26,6 +26,10 @@ $sireJSON = json_encode($sireArr);
 $damArr = getAllDam();
 $damJSON = json_encode($damArr);
 
+// Hodowcy
+$hodoArr = getAllHodowcyPsow();
+$hodoJSON = json_encode( $hodoArr);
+
 ?>
 
 <style type="text/css">
@@ -558,16 +562,54 @@ $damJSON = json_encode($damArr);
                 countries[i].image = 'https://cdn.jsdelivr.net/npm/svg-country-flags@1.2.10/svg/' + countries[i].value.toLowerCase() + '.svg';
             }
 
-            // Owner
-            jSuites.dropdown(document.getElementById('owner-dropdown'), {
+             // Owner
+            var dropdown1 =   jSuites.dropdown(document.getElementById('owner-dropdown'), {
                 data: countries,
                 autocomplete: true,
                 multiple: false,
                 width: '100%',
-                value : 'Mołdawia'
+               
             });
             var ownerDropdown = document.querySelector("#owner-dropdown input");
             ownerDropdown.setAttribute('name', 'owner_country');
+
+
+            // Set owner nationality
+             ownerDropdown.addEventListener('click', function() {
+
+                var ownerNameGet = $('#owner-name').val();
+                $.ajax({
+                    url: '<?php echo admin_url("admin-ajax.php"); ?>', 
+                    type: 'POST',
+                    data: { action: 'get_owner_nationality', name: ownerNameGet },
+                    success: function(response) {
+                        
+                        if(response != ''){
+
+
+
+                            var foundCountry = countries.find(function(country) {
+                                return country.text === response;
+                            });
+
+                            if (foundCountry) {
+                                var countryCode = foundCountry.value;
+                                 dropdown1.close(true);
+                                // Ustaw wartość 'PL' po kliknięciu
+                                dropdown1.setValue(countryCode);
+                            // Dodaj atrybut "disabled"
+                            } 
+
+
+                            
+                        }
+
+                    }
+                });
+
+            });
+
+            
            
             // Breeder
             jSuites.dropdown(document.getElementById('breeder-dropdown'), {
@@ -581,9 +623,13 @@ $damJSON = json_encode($damArr);
 
             // Datepicker
             $('.datepicker').datepicker({
-                language: "en",
+                 language: "en",
                 autoclose: true,
-                format: "dd/mm/yyyy"
+                format: "dd/mm/yyyy" ,
+                changeYear: true,
+                minDate: new Date('01/01/1970'), 
+                maxDate: new Date(), 
+                 yearRange: "1970:" + new Date().getFullYear()
             });
 
              
@@ -592,18 +638,19 @@ $damJSON = json_encode($damArr);
             */
 
             // Owners autocomplete
-            var ownersList = <?php echo $ownersJSON; ?>;
+            var ownersList = <?php echo $hodoJSON; ?>;
             $( "#owner-name" ).autocomplete({
                source: ownersList
             });
 
             // Breeders autocomplete
-            var breedersList = <?php echo $breedersJSON; ?>;
+            var breedersList = <?php echo $hodoJSON; ?>;
             $( "#breeder-name" ).autocomplete({
                source: breedersList
             });
             
             // Sire autocomplete
+
             var sireList = <?php echo $sireJSON; ?>;
             $( "#sire" ).autocomplete({
                source: sireList

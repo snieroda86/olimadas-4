@@ -334,3 +334,23 @@ require get_template_directory() . '/inc/customize-login_page.php';
 require get_template_directory() . '/inc/search-result.php';
 
 
+// Get owner nationality
+add_action('wp_ajax_get_owner_nationality', 'get_owner_nationality');
+add_action('wp_ajax_nopriv_get_owner_nationality', 'get_owner_nationality'); // Jeśli obsługuje żądania dla użytkowników niezalogowanych
+
+function get_owner_nationality() {
+    if (isset($_POST['name'])) {
+        $name = sanitize_text_field($_POST['name']);
+        
+        $get_owner = get_page_by_title( $name , OBJECT , 'hodowcy_psow');
+        if(!empty($get_owner)){
+        	$owner_nationality = get_field('narodowosc' , $get_owner->ID );
+        	echo $owner_nationality;
+
+        }else{
+        	echo '';
+        }
+        
+        wp_die(); 
+    }
+}

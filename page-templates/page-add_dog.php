@@ -11,7 +11,7 @@ include get_template_directory() . '/inc/insert_custom_post.php';
 
 get_header();
 
-?>
+?> 
 
 <style type="text/css">
     .dog-photo-container{
@@ -476,15 +476,55 @@ get_header();
             }
 
             // Owner
-            jSuites.dropdown(document.getElementById('owner-dropdown'), {
+            var dropdown1 =   jSuites.dropdown(document.getElementById('owner-dropdown'), {
                 data: countries,
                 autocomplete: true,
                 multiple: false,
                 width: '100%',
-                value : 'Mołdawia'
+               
             });
+
             var ownerDropdown = document.querySelector("#owner-dropdown input");
             ownerDropdown.setAttribute('name', 'owner_country');
+
+            // Set owner nationality
+             ownerDropdown.addEventListener('click', function() {
+
+                var ownerNameGet = $('#owner-name').val();
+                $.ajax({
+                    url: '<?php echo admin_url("admin-ajax.php"); ?>', 
+                    type: 'POST',
+                    data: { action: 'get_owner_nationality', name: ownerNameGet },
+                    success: function(response) {
+                        
+                        if(response != ''){
+
+
+
+                            var foundCountry = countries.find(function(country) {
+                                return country.text === response;
+                            });
+
+                            if (foundCountry) {
+                                var countryCode = foundCountry.value;
+                                 dropdown1.close(true);
+                                // Ustaw wartość 'PL' po kliknięciu
+                                dropdown1.setValue(countryCode);
+                            // Dodaj atrybut "disabled"
+                            } 
+
+
+                            
+                        }
+
+                    }
+                });
+
+            });
+
+
+
+
            
             // Breeder
             jSuites.dropdown(document.getElementById('breeder-dropdown'), {

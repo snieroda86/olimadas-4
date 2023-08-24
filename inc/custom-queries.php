@@ -115,20 +115,7 @@ function getPageByTitleSN( $title , $type){
 
 	$query = new WP_Query( $args );
 
-	if ( $query->have_posts() ) {
-	    while ( $query->have_posts() ) {
-	        $query->the_post();
-
-	        $post_id = get_the_ID();
-
-	    }
-
-	    wp_reset_postdata();
-	} else {
-	    $post_id = null;
-	}
-
-	return $post_id;
+	return $query;
 
 }
 
@@ -145,6 +132,20 @@ function getDogByID( $id ){
 
 	return $dog;
 
+}
+
+function getDogByTitleSN($title ){
+
+	$args_gd = array(
+	   'post_type'      => 'rodowody_psow',
+        'post_status'    => 'publish',
+        'posts_per_page' => 1,
+        'title'   => $title 
+	);
+
+	$dog_gd = new WP_Query( $args_gd );
+
+	return $dog_gd;
 }
 
 // Dog offspring
