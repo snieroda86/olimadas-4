@@ -106,6 +106,10 @@ get_header();
             $damArr = getAllDam();
             $damJSON = json_encode($damArr);
 
+            // Hodowcy
+            $hodoArr = getAllHodowcyPsow();
+            $hodoJSON = json_encode( $hodoArr);
+
             ?>
 
             <?php 
@@ -150,21 +154,59 @@ get_header();
                             <!-- Owner name-->
                             <div class="form-group mb-4">
                                 <label for="owner-name">Owner name</label>
-                                <?php $wlasciciel = get_post_meta($cd_id , 'wlasciciel' , true); ?>
+                                <?php 
+                                $wlasciciel_id = get_post_meta($cd_id , 'wlasciciel' , true); 
+                                if(!empty($wlasciciel_id)){
+                                    $wlasciciel_obj=getHodowcaByID($wlasciciel_id);
+                                    if ( $wlasciciel_obj->have_posts() ) {
+                                        while ( $wlasciciel_obj->have_posts() ) {
+                                            $wlasciciel_obj->the_post();
+                                            $wlasciciel  = get_the_title();
+                                            $wlasciciel_narodowosc = get_field('narodowosc');
+                                        }
+                                        wp_reset_postdata(); 
+                                    }else{
+                                        $wlasciciel = '';
+                                        $wlasciciel_narodowosc = '';
+                                    }
+                                }else{
+                                    $wlasciciel = '';
+                                    $wlasciciel_narodowosc = '';
+                                }   
+                                ?>
                                 <input type="text" value="<?php echo $wlasciciel; ?>" name="wlasciciel" class="form-control" id="owner-name" placeholder="Owner name" required>
+                                
                             </div>
 
                             <!-- Owner country -->
                             <div class="form-group mb-4">
-                                <?php $owner_country = get_post_meta($cd_id , 'owner_country' , true); ?>
-
                                 <label>Owner's nationality</label>
                                 <div id="owner-dropdown"></div>
                             </div>
 
                              <!-- Breeder name -->
                             <div class="form-group mb-4">
-                                <?php $hodowca = get_post_meta($cd_id , 'hodowca' , true); ?>
+                                <?php 
+                                $hodowca_id = get_post_meta($cd_id , 'hodowca' , true); 
+                                if( !empty($hodowca_id)){
+                                    $hodowca_obj=getHodowcaByID($hodowca_id);
+                                    if ( $hodowca_obj->have_posts() ) {
+                                        while ( $hodowca_obj->have_posts() ) {
+                                            $hodowca_obj->the_post();
+                                            $hodowca  = get_the_title();
+                                            $hodowca_narodowosc = get_field('narodowosc');
+                                        }
+                                        wp_reset_postdata(); 
+                                    }else{
+                                        $hodowca = '';
+                                        $hodowca_narodowosc = '';
+                                    }
+                                }else{
+                                    $hodowca = '';
+                                    $hodowca_narodowosc = '';
+                                }
+
+                                ?>
 
                                 <label for="breeder-name">Breeder name</label>
                                 <input type="text" name="hodowca" value="<?php echo $hodowca; ?>" class="form-control" id="breeder-name" placeholder="Breeder name" required>
@@ -172,7 +214,6 @@ get_header();
 
                             <!-- Breeder country -->
                             <div class="form-group mb-4">
-                                <?php $breeder_country = get_post_meta($cd_id , 'breeder_country' , true); ?>
                                 <label>Breeder's nationality</label>
                                 <div id="breeder-dropdown"></div>
                             </div>
@@ -182,15 +223,43 @@ get_header();
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
                             <!-- Sire -->
                             <div class="form-group mb-4">
-                                <?php $ojciec_sire = get_post_meta($cd_id , 'ojciec_sire' , true); ?>
+                                <?php 
+                                $sire_id = get_post_meta($cd_id , 'ojciec_sire' , true); 
+
+                                $sire_obj=getDogByID($sire_id);
+                                if ( $sire_obj->have_posts() ) {
+                                    while ( $sire_obj->have_posts() ) {
+                                        $sire_obj->the_post();
+                                        $sire_name  = get_the_title();
+                                        
+                                    }
+                                    wp_reset_postdata(); 
+                                }else{
+                                    $sire_name = '';
+                                }
+                                ?>
                                 <label for="sire">Sire</label>
-                                <input type="text" name="ojciec_sire" value="<?php echo $ojciec_sire; ?>" class="form-control" id="sire" placeholder="Search for sire" required>
+                                <input type="text" name="ojciec_sire" value="<?php echo $sire_name; ?>" class="form-control" id="sire" placeholder="Search for sire" required>
                             </div>
                             <!-- Dam -->
                             <div class="form-group mb-4">
-                                <?php $matka_dam = get_post_meta($cd_id , 'matka_dam' , true); ?>
+                                 <?php 
+                                $dam_id = get_post_meta($cd_id , 'matka_dam' , true); 
+                                
+                                $dam_obj=getDogByID($dam_id);
+                                if ( $dam_obj->have_posts() ) {
+                                    while ( $dam_obj->have_posts() ) {
+                                        $dam_obj->the_post();
+                                        $dam_name  = get_the_title();
+                                        
+                                    }
+                                    wp_reset_postdata(); 
+                                }else{
+                                    $dam_name = '';
+                                }
+                                ?>
                                 <label for="dam">Dam</label>
-                                <input type="text" name="matka_dam" value="<?php echo $matka_dam; ?>" class="form-control" id="dam" placeholder="Search for dam" required>
+                                <input type="text" name="matka_dam" value="<?php echo $dam_name; ?>" class="form-control" id="dam" placeholder="Search for dam" required>
                             </div>
 
                             <!-- Birth date-->
@@ -516,6 +585,22 @@ get_header();
             var ownerDropdown = document.querySelector("#owner-dropdown input");
             ownerDropdown.setAttribute('name', 'owner_country');
 
+
+            // Set existing val for owner nationality
+            var foundCountry = countries.find(function(country) {
+                return country.text == '<?php echo $wlasciciel_narodowosc ?>';
+            });
+            // console.log(foundCountry);
+            if (foundCountry) {
+                var countryCode = foundCountry.value;
+                ownerDropdown.addEventListener('click', function() { 
+                    ownerCountry.setValue(countryCode);
+                    // ownerCountry.close(true);
+                })
+
+            } 
+            // Set nationality end
+
             // Set value
             var ownerCountryDef = "<?php echo $owner_country ?>"; 
             var ownerCountryValue = null;
@@ -551,9 +636,14 @@ get_header();
 
             // Datepicker
             $('.datepicker').datepicker({
-                language: "en",
+                 language: "en",
                 autoclose: true,
-                format: "dd/mm/yyyy"
+                format: "dd/mm/yyyy" ,
+                changeYear: true,
+                minDate: new Date('01/01/1970'), 
+                maxDate: new Date(), 
+                 yearRange: "1970:" + new Date().getFullYear()
+
             });
 
              
@@ -562,13 +652,13 @@ get_header();
             */
 
             // Owners autocomplete
-            var ownersList = <?php echo $ownersJSON; ?>;
+           var ownersList = <?php echo $hodoJSON; ?>;
             $( "#owner-name" ).autocomplete({
                source: ownersList
             });
 
             // Breeders autocomplete
-            var breedersList = <?php echo $breedersJSON; ?>;
+            var breedersList = <?php echo $hodoJSON; ?>;
             $( "#breeder-name" ).autocomplete({
                source: breedersList
             });

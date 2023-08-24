@@ -119,7 +119,7 @@ function getPageByTitleSN( $title , $type){
 
 }
 
-// Get dog by title
+// Get dog by ID
 function getDogByID( $id ){
 	$args = array(
 	   'post_type'      => 'rodowody_psow',
@@ -133,6 +133,23 @@ function getDogByID( $id ){
 	return $dog;
 
 }
+
+// Get post type hodowcy_psow by ID
+function getHodowcaByID( $id ){
+	$args = array(
+	   'post_type'      => 'hodowcy_psow',
+        'post_status'    => 'publish',
+        'posts_per_page' => 1,
+        'p'              => $id 
+	);
+
+	$hodowca = new WP_Query( $args );
+
+	return $hodowca;
+
+}
+
+
 
 function getDogByTitleSN($title ){
 
