@@ -274,6 +274,8 @@ if(isset($_POST['insert_rodowod_psa'])){
                 );
 
                 $new_sire_id = wp_insert_post($post_args); 
+                update_field('plec_psa', 'male' , $new_sire_id);
+
                 
                
                
@@ -296,6 +298,8 @@ if(isset($_POST['insert_rodowod_psa'])){
                 );
 
                 $new_dam_id = wp_insert_post($post_args); 
+                update_field('plec_psa', 'female' , $new_dam_id);
+
                 
                
                

@@ -612,7 +612,7 @@ $hodoJSON = json_encode( $hodoArr);
             
            
             // Breeder
-            jSuites.dropdown(document.getElementById('breeder-dropdown'), {
+            var dropdown2 = jSuites.dropdown(document.getElementById('breeder-dropdown'), {
                 data: countries,
                 autocomplete: true,
                 multiple: false,
@@ -620,6 +620,44 @@ $hodoJSON = json_encode( $hodoArr);
             });
             var breederDropdown = document.querySelector("#breeder-dropdown input");
             breederDropdown.setAttribute('name', 'breeder_country');
+
+
+             // Set breeder nationality
+             breederDropdown.addEventListener('click', function() {
+
+                var breederNameGet = $('#breeder-name').val();
+                $.ajax({
+                    url: '<?php echo admin_url("admin-ajax.php"); ?>', 
+                    type: 'POST',
+                    data: { action: 'get_owner_nationality', name: breederNameGet },
+                    success: function(response) {
+                        
+                        if(response != ''){
+
+
+
+                            var foundCountry = countries.find(function(country) {
+                                return country.text === response;
+                            });
+
+                            if (foundCountry) {
+                                var countryCode = foundCountry.value;
+                                 dropdown2.close(true);
+                                // Ustaw wartość 'PL' po kliknięciu
+                                dropdown2.setValue(countryCode);
+                            // Dodaj atrybut "disabled"
+                            } 
+
+
+                            
+                        }
+
+                    }
+                });
+
+            });
+
+
 
             // Datepicker
             $('.datepicker').datepicker({

@@ -28,13 +28,14 @@ get_header(); ?>
 		<div style="max-width: 580px;margin:auto;min-height: 70vh;">
 			<div>
 				<h5 class="text-center pb-4">
-					<?php $owner = sanitize_text_field($_GET['owner']); ?>
-					<?php echo $owner; ?>	
+					<?php $owner_id = sanitize_text_field($_GET['owner']); ?>
+					<?php $owner_name = get_post($owner_id)->post_title; ?>
+					<?php echo $owner_name; ?>	
 				</h5>
 			</div>
 			<?php 
 			
-            $ownerDogs = getAllOwnerDogs($owner);
+            $ownerDogs = getAllOwnerDogs($owner_id);
 
             if(!empty($ownerDogs)){
             	echo '<table class="table table-bordered">';

@@ -175,7 +175,7 @@ get_header();
 					<div class="col-md-6">
 				        <!-- Offspring -->
 	                    <div class="card mb-4">
-	                    	 <?php $offspring = getDogOffspring( get_the_title() , get_field('plec_psa') ); ?>
+	                    	 <?php $offspring = getDogOffspring( get_the_ID() , get_field('plec_psa') ); ?>
 	                        <div class="card-header"><?php _e('Offspring' , 'web14devsn'); ?> (<?php echo count($offspring); ?>)</div>
 	                        <div class="card-body">
 

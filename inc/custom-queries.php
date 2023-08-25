@@ -165,8 +165,44 @@ function getDogByTitleSN($title ){
 	return $dog_gd;
 }
 
-// Dog offspring
-function getDogOffspring( $post_title , $gender ){
+// Dog offspring  - OLD
+// function getDogOffspring( $post_title , $gender ){
+// 	if($gender == 'male'){
+
+// 		$offspring = get_posts(array(
+// 		    'post_type' => 'rodowody_psow',
+// 		    'posts_per_page' => -1 ,
+// 		    'meta_query' => array(
+// 		        array(
+// 		            'key' => 'ojciec_sire',
+// 		            'value' => $post_title ,
+// 		            'compare' => '='
+// 		        )
+// 		    )
+// 		));
+
+// 	}else{
+
+// 		$offspring = get_posts(array(
+// 		    'post_type' => 'rodowody_psow',
+// 		    'posts_per_page' => -1 ,
+// 		    'meta_query' => array(
+// 		        array(
+// 		            'key' => 'matka_dam',
+// 		            'value' => $post_title ,
+// 		            'compare' => '='
+// 		        )
+// 		    )
+// 		));
+
+// 	}
+
+// 	return $offspring; 
+// }
+
+
+// Get offspring - NEW
+function getDogOffspring( $dog_id , $gender ){
 	if($gender == 'male'){
 
 		$offspring = get_posts(array(
@@ -175,7 +211,7 @@ function getDogOffspring( $post_title , $gender ){
 		    'meta_query' => array(
 		        array(
 		            'key' => 'ojciec_sire',
-		            'value' => $post_title ,
+		            'value' => $dog_id ,
 		            'compare' => '='
 		        )
 		    )
@@ -189,7 +225,7 @@ function getDogOffspring( $post_title , $gender ){
 		    'meta_query' => array(
 		        array(
 		            'key' => 'matka_dam',
-		            'value' => $post_title ,
+		            'value' => $dog_id ,
 		            'compare' => '='
 		        )
 		    )
@@ -200,8 +236,48 @@ function getDogOffspring( $post_title , $gender ){
 	return $offspring; 
 }
 
-// Sinblings
 
+
+
+
+
+
+
+// Sinblings  - OLD
+
+// function getDogSiblings( $post_id ,  $sire , $dam){
+
+// 	$siblings = null;
+
+// 	if(!empty($post_id) && !empty($sire) &&  !empty($dam) ){
+
+// 		$siblings = get_posts(array(
+// 		    'post_type' => 'rodowody_psow',
+// 		    'posts_per_page' => -1,
+// 		    'post__not_in' => array($post_id),
+// 		    'meta_query' => array(
+// 		        'relation' => 'AND',
+// 		        array(
+// 		            'key' => 'matka_dam',
+// 		            'value' => $dam ,
+// 		            'compare' => '='
+// 		        ),
+// 		        array(
+// 		            'key' => 'ojciec_sire',
+// 		            'value' => $sire,
+// 		            'compare' => '='
+// 		        )
+// 		    )
+// 		));
+// 	}
+
+// 	return $siblings;
+
+// }
+
+
+
+// Siblings  - NEW
 function getDogSiblings( $post_id ,  $sire , $dam){
 
 	$siblings = null;
@@ -231,6 +307,11 @@ function getDogSiblings( $post_id ,  $sire , $dam){
 	return $siblings;
 
 }
+
+
+
+
+
 
 // Get all owner dogs
 function getAllOwnerDogs( $owner ){
