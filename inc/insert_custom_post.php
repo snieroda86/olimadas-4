@@ -12,7 +12,7 @@ $breeder_country = '';
 $ojciec_sire = '';
 $matka_dam = '';
 $data_urodzenia = '';
-$tytuly = '';
+$tytuly = ''; 
 
 if(isset($_POST['insert_rodowod_psa'])){
     $post_title = $_POST['post_title'];

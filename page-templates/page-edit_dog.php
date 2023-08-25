@@ -132,7 +132,7 @@ get_header();
 
             <!-- Post insert form start -->
             <form method="post" class="one-line-border-form" enctype="multipart/form-data" action="">
-                <div class="container">
+                <div class="container pt-5">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-3">
                             <!-- Dog name -->
@@ -226,14 +226,18 @@ get_header();
                                 <?php 
                                 $sire_id = get_post_meta($cd_id , 'ojciec_sire' , true); 
 
-                                $sire_obj=getDogByID($sire_id);
-                                if ( $sire_obj->have_posts() ) {
-                                    while ( $sire_obj->have_posts() ) {
-                                        $sire_obj->the_post();
-                                        $sire_name  = get_the_title();
-                                        
+                                if(!empty($sire_id)){
+                                    $sire_obj=getDogByID($sire_id);
+                                    if ( $sire_obj->have_posts() ) {
+                                        while ( $sire_obj->have_posts() ) {
+                                            $sire_obj->the_post();
+                                            $sire_name  = get_the_title();
+                                            
+                                        }
+                                        wp_reset_postdata(); 
+                                    }else{
+                                        $sire_name = '';
                                     }
-                                    wp_reset_postdata(); 
                                 }else{
                                     $sire_name = '';
                                 }
@@ -245,18 +249,24 @@ get_header();
                             <div class="form-group mb-4">
                                  <?php 
                                 $dam_id = get_post_meta($cd_id , 'matka_dam' , true); 
-                                
-                                $dam_obj=getDogByID($dam_id);
-                                if ( $dam_obj->have_posts() ) {
-                                    while ( $dam_obj->have_posts() ) {
-                                        $dam_obj->the_post();
-                                        $dam_name  = get_the_title();
-                                        
+
+                                if( !empty( $dam_id)){
+                                    $dam_obj=getDogByID($dam_id);
+                                    if ( $dam_obj->have_posts() ) {
+                                        while ( $dam_obj->have_posts() ) {
+                                            $dam_obj->the_post();
+                                            $dam_name  = get_the_title();
+                                            
+                                        }
+                                        wp_reset_postdata(); 
+                                    }else{
+                                        $dam_name = '';
                                     }
-                                    wp_reset_postdata(); 
                                 }else{
                                     $dam_name = '';
                                 }
+                                
+                                
                                 ?>
                                 <label for="dam">Dam</label>
                                 <input type="text" name="matka_dam" value="<?php echo $dam_name; ?>" class="form-control" id="dam" placeholder="Search for dam" required>
@@ -587,18 +597,20 @@ get_header();
 
 
             // Set existing val for owner nationality
-            var foundCountry = countries.find(function(country) {
+            var foundCountryOwner = countries.find(function(country) {
                 return country.text == '<?php echo $wlasciciel_narodowosc ?>';
             });
             // console.log(foundCountry);
-            if (foundCountry) {
-                var countryCode = foundCountry.value;
-                ownerDropdown.addEventListener('click', function() { 
-                    ownerCountry.setValue(countryCode);
-                    // ownerCountry.close(true);
-                })
+            if (foundCountryOwner) {
+                var countryCodeOwner = foundCountryOwner.value;
+               
+                 window.addEventListener('load', (event) => {
+                    ownerCountry.setValue(countryCodeOwner);
+                });
 
             } 
+
+
             // Set nationality end
 
             // Set value
@@ -622,6 +634,20 @@ get_header();
             });
             var breederDropdown = document.querySelector("#breeder-dropdown input");
             breederDropdown.setAttribute('name', 'breeder_country');
+
+             // Set existing val for owner nationality
+            var foundCountryBreeder = countries.find(function(country) {
+                return country.text == '<?php echo $hodowca_narodowosc ?>';
+            });
+            // console.log(foundCountry);
+            if (foundCountryBreeder) {
+                var countryCodeBreeder = foundCountryBreeder.value;
+               
+                 window.addEventListener('load', (event) => {
+                    breederCountry.setValue(countryCodeBreeder);
+                });
+
+            } 
 
              // Set value
             var breederCountryDef = "<?php echo $breeder_country ?>"; 

@@ -67,6 +67,23 @@ if(isset($_POST['edit_rodowod_psa'])){
         $validation_errors[] = 'Birth date field is required';
     }
 
+     // Image upload
+    if (isset($_FILES['dog_photo']) && !empty($_FILES['dog_photo']['name'])) {
+        // Check image size
+        $image_size = $p_image['size'] / 1024; // Rozmiar w kilobajtach
+        if ($image_size > 300) {
+            $validation_errors[] = 'Error: photo size cannot exceed 300kb';
+            return;
+        }
+
+        // Chcek image type
+        $image_type = strtolower(pathinfo($p_image['name'], PATHINFO_EXTENSION));
+        if (!in_array($image_type, array('jpg', 'jpeg', 'png', 'gif'))) {
+            $validation_errors[] = "Error: wrong image type ( allowed types: 'jpg', 'jpeg', 'png')";
+            return;
+        }
+    } 
+
     // Chceck errors
     $validation_check = false;
     if(!empty($validation_errors) && count($validation_errors) > 0){
@@ -79,11 +96,118 @@ if(isset($_POST['edit_rodowod_psa'])){
         // Update post
         $post_id = intval($_GET['dog_id']); // Pobranie ID posta do edycji
 
-        $existing_post = get_post($post_id);
-        if (!$existing_post) {
+        $existing_post_obj = get_post($post_id);
+        if (!$existing_post_obj) {
             $validation_errors[] = 'Post not found!';
             return;
         }
+
+        // Check if dog name already exists
+        // $existing_post = get_page_by_title($post_title, OBJECT, 'rodowody_psow');
+        // if ($existing_post) {
+        //     $validation_errors[] = 'Dog name already exists!';
+        //     return;
+        // }
+
+        // get owner id
+         // Insert or create "Owner"
+            $existing_wlasciciel = get_page_by_title($wlasciciel, OBJECT, 'hodowcy_psow');
+            if(!$existing_wlasciciel){
+
+               
+                    $post_args = array(
+                        'post_title'   => $wlasciciel,
+                        'post_status'  => 'publish', // Status posta: opublikowany
+                        'post_type'    => 'hodowcy_psow' // Nazwa custom post type
+                        
+                    );
+
+                    $new_wlasciciel_id = wp_insert_post($post_args); 
+                    update_field('narodowosc', $owner_country , $new_wlasciciel_id);  
+                
+
+               
+            }else{
+                $new_wlasciciel_id = $existing_wlasciciel->ID;
+            }
+        
+
+
+        // Get breeder id
+        // Insert or create "Breeder"
+            $existing_hodowca = get_page_by_title($hodowca, OBJECT, 'hodowcy_psow');
+            if(!$existing_hodowca){
+
+               if($wlasciciel !==$hodowca){
+                 $post_args = array(
+                        'post_title'   => $hodowca,
+                        'post_status'  => 'publish', // Status posta: opublikowany
+                        'post_type'    => 'hodowcy_psow' // Nazwa custom post type
+                        
+                    );
+
+                    $new_hodowca_id = wp_insert_post($post_args); 
+                    update_field('narodowosc', $breeder_country , $new_hodowca_id);  
+               }
+               
+            }else{
+                $new_hodowca_id = $existing_hodowca->ID;
+            }
+
+
+            // Insert or create sire
+            $existing_sire = get_page_by_title($ojciec_sire, OBJECT, 'rodowody_psow');
+            if(!$existing_sire){
+
+              
+                $post_args = array(
+                    'post_title'   => $ojciec_sire,
+                    'post_status'  => 'publish', // Status posta: opublikowany
+                    'post_type'    => 'rodowody_psow' // Nazwa custom post type
+                    
+                );
+
+                $new_sire_id = wp_insert_post($post_args); 
+                update_field('plec_psa', 'male' , $new_sire_id);  
+
+                
+               
+               
+            }else{
+                $new_sire_id = $existing_sire->ID;
+            }
+
+
+
+
+             // Insert or create dam
+             $existing_dam = get_page_by_title($matka_dam, OBJECT, 'rodowody_psow');
+            if(!$existing_dam){
+
+              
+                $post_args = array(
+                    'post_title'   => $matka_dam,
+                    'post_status'  => 'publish', // Status posta: opublikowany
+                    'post_type'    => 'rodowody_psow' // Nazwa custom post type
+                    
+                );
+
+                $new_dam_id = wp_insert_post($post_args); 
+                update_field('plec_psa', 'female' , $new_dam_id);  
+
+                
+               
+               
+            }else{
+                $new_dam_id = $existing_dam->ID;
+            }
+
+
+
+
+
+
+
 
         $updated_post = array(
             'ID' => $post_id,
@@ -97,13 +221,13 @@ if(isset($_POST['edit_rodowod_psa'])){
         if ($updated) {
             // Aktualizacja innych metadanych
             // update_post_meta($post_id, 'dog_color', $color);
-            update_field('wlasciciel', $wlasciciel, $post_id);
+            update_field('wlasciciel', $new_wlasciciel_id, $post_id);
             update_field('plec_psa', $gender, $post_id);
-            update_field('owner_country', $owner_country, $post_id);
-            update_field('hodowca', $hodowca, $post_id);
-            update_field('breeder_country', $breeder_country, $post_id);
-            update_field('ojciec_sire', $ojciec_sire, $post_id);
-            update_field('matka_dam', $matka_dam, $post_id);
+            // update_field('owner_country', $owner_country, $post_id);
+            update_field('hodowca', $new_hodowca_id, $post_id);
+            // update_field('breeder_country', $breeder_country, $post_id);
+            update_field('ojciec_sire', $new_sire_id, $post_id);
+            update_field('matka_dam', $new_dam_id, $post_id);
             update_field('data_urodzenia', $data_urodzenia, $post_id);
             update_field('tytuly', $tytuly, $post_id);
 
@@ -144,81 +268,7 @@ if(isset($_POST['edit_rodowod_psa'])){
             }
 
              // Create new dog card if not exists in db
-                // Sire 
-                $checkSireExists = getDogByTitleSN($ojciec_sire);
-                if ( !$checkSireExists->have_posts()) {
-                    // Create dog empty card
-                    $new_sire = array(
-                        'post_title' => $ojciec_sire,
-                        'post_status' => 'publish',
-                        'post_type' => 'rodowody_psow',
-                    );
-
-                    $new_sire_id = wp_insert_post($new_sire);
-                    update_field('plec_psa', 'male' , $new_sire_id);
-
-                }
-
-                // Dam
-                $checkDamExists = getDogByTitleSN($matka_dam);
-                if ( !$checkDamExists->have_posts()) {
-                    // Create dog empty card
-                    $new_dam = array(
-                        'post_title' => $matka_dam,
-                        'post_status' => 'publish',
-                        'post_type' => 'rodowody_psow',
-                    );
-
-                    $new_dam_id = wp_insert_post($new_dam);
-                    update_field('plec_psa', 'female' , $new_dam_id);
-
-                }
-
-                // Edycja tytułu posta dal wszystkich psów
-                if($gender=='female'){
-
-                    $args = array(
-                        'post_type' => 'rodowody_psow',
-                        'meta_query' => array(
-                            array(
-                                'key' => 'matka_dam',
-                                'value' => $current_dog_name,
-                                'compare' => '='
-                            )
-                        )
-                    );
-
-                    $posts_edit = get_posts($args);
-
-                    foreach ($posts_edit as $post_e) {
-                            setup_postdata($post_e);
-                            $post_id_e = $post_e->ID;
-                            update_post_meta($post_id_e, 'matka_dam', $post_title);
-                    }
-
-
-                }elseif($gender =='male'){
-                    $args = array(
-                        'post_type' => 'rodowody_psow',
-                        'meta_query' => array(
-                            array(
-                                'key' => 'ojciec_sire',
-                                'value' => $current_dog_name,
-                                'compare' => '='
-                            )
-                        )
-                    );
-
-                    $posts_edit = get_posts($args);
-
-                    foreach ($posts_edit as $post_e) {
-                            setup_postdata($post_e);
-                            $post_id_e = $post_e->ID;
-                            update_post_meta($post_id_e, 'ojciec_sire', $post_title);
-                    }
-
-
-                }
+                
 
             // Przekierowanie
             $redirect_url = get_permalink($post_id);
