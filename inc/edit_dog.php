@@ -129,6 +129,8 @@ if(isset($_POST['edit_rodowod_psa'])){
                
             }else{
                 $new_wlasciciel_id = $existing_wlasciciel->ID;
+                update_field('narodowosc', $owner_country , $new_wlasciciel_id);  
+
             }
         
 
@@ -152,6 +154,7 @@ if(isset($_POST['edit_rodowod_psa'])){
                
             }else{
                 $new_hodowca_id = $existing_hodowca->ID;
+                update_field('narodowosc', $breeder_country , $new_hodowca_id); 
             }
 
 

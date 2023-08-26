@@ -594,7 +594,7 @@ $hodoJSON = json_encode( $hodoArr);
 
                             if (foundCountry) {
                                 var countryCode = foundCountry.value;
-                                 dropdown1.close(true);
+                                 // dropdown1.close(true);
                                 // Ustaw wartość 'PL' po kliknięciu
                                 dropdown1.setValue(countryCode);
                             // Dodaj atrybut "disabled"
@@ -642,7 +642,7 @@ $hodoJSON = json_encode( $hodoArr);
 
                             if (foundCountry) {
                                 var countryCode = foundCountry.value;
-                                 dropdown2.close(true);
+                                 // dropdown2.close(true);
                                 // Ustaw wartość 'PL' po kliknięciu
                                 dropdown2.setValue(countryCode);
                             // Dodaj atrybut "disabled"
