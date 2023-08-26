@@ -24,7 +24,7 @@
 												$dam_sire_1_id = $dam_dog->ID;
 
 												// To array - pokolenie 1
-												$dam_pedigree_arr[1] = $dam_sire_1_id;
+												$dam_pedigree_arr[1][1] = $dam_sire_1_id;
 
 												$dam_dog_color = get_post_meta( $dam_sire_1_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dam_dog->ID.' " style="background:'.$dam_dog_color.'">';

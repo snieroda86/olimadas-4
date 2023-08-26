@@ -30,6 +30,10 @@ get_header(); ?>
 
 		<!-- Sire pedigree -->
 		<div class="row">
+
+			<div class="col-12 pt-4 pb-5">
+				<h5><span><svg fill="#b37f2b" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path fiil="#b37f2b" d="M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z"/></svg></span><span class="pl-2"><a style="text-decoration: underline;" class="color-gold" href="#inbread-value-dynamic"><?php _e('Click to see dog inbreeding coefficient' , 'web14devsn'); ?></a></span></h5>
+			</div>
 			<div class="col-12">
         		<!-- Sire -->
         		<div class="pedigree-table">
@@ -66,7 +70,7 @@ get_header(); ?>
 												$sire_1_id = $dog->ID;
 
 												// To array - pokolenie 1
-												$sire_pedigree_arr[1] = $sire_1_id;
+												$sire_pedigree_arr[1][1] = $sire_1_id;
 
 												$dog_color = get_post_meta( $sire_1_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
@@ -1439,10 +1443,36 @@ get_header(); ?>
 
 		<div class="inbreed-val">
 			<?php 
-			echo '<pre>';
-			print_r($dam_pedigree_arr);
-			echo '</pre>';
+			// echo '<pre>';
+			// print_r($dam_pedigree_arr);
+			// echo '</pre>';
+
+			// echo '<br><br>';
+			// echo '<pre>';
+			// print_r($sire_pedigree_arr);
+			// echo '</pre>';
 			?>
+
+			
+			<div id="inbread-value-dynamic" class="pt-5 pb-4">
+				<?php 
+				$common_ancestors = array_intersect_key($dam_pedigree_arr, $sire_pedigree_arr);
+				$inbreeding_coefficient = 0;
+
+				foreach ($common_ancestors as $generation => $ancestors) {
+				    foreach ($ancestors as $ancestor) {
+				        $n_i = $generation;
+				        $m_i = $generation;
+				        $inbreeding_coefficient += 0.5 ** ($n_i + $m_i);
+				    }
+				}
+
+				$final_inbreeding_coefficient = 0.5 * $inbreeding_coefficient;
+				$rounded_inbreeding_coefficient = round($final_inbreeding_coefficient, 3);
+
+				echo "<h5>Inbreeding coefficient: <span>". $rounded_inbreeding_coefficient."</span></h5>" ;
+				?>
+			</div>
 		</div>
 
 
