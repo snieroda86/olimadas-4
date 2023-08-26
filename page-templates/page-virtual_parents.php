@@ -40,9 +40,10 @@ get_header(); ?>
 
         			$sire_pedigree_arr =[];
 
-        			echo '<pre>';
-        			print_r($sire_pedigree_arr);
-        			echo '</pre>';
+        			$dam_pedigree_arr =[];
+
+
+        			
 
 
         			?>
@@ -63,6 +64,10 @@ get_header(); ?>
 												$dog = $get_sire_1->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_1_id = $dog->ID;
+
+												// To array - index 1
+												$sire_pedigree_arr[1] = $sire_1_id;
+
 												$dog_color = get_post_meta( $sire_1_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -99,6 +104,10 @@ get_header(); ?>
 												$dog = $get_sire_2_1->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_2_1_id = $dog->ID;
+
+												// To array - pokolenie 2
+												$sire_pedigree_arr[2][1] = $sire_2_1_id ;
+
 												$dog_color = get_post_meta( $sire_2_1_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -139,6 +148,10 @@ get_header(); ?>
 												$dog = $get_dam_2_2->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_2_2_id = $dog->ID;
+
+												// To array - pokolenie 2
+												$sire_pedigree_arr[2][2] = $dam_2_2_id ;
+
 												$dog_color = get_post_meta( $dam_2_2_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -182,6 +195,10 @@ get_header(); ?>
 												$dog = $get_sire_3_1->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_3_1_id = $dog->ID;
+
+												// To array - pokolenie 3
+												$sire_pedigree_arr[3][1] = $sire_3_1_id ;
+
 												$dog_color = get_post_meta( $sire_3_1_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -223,6 +240,10 @@ get_header(); ?>
 												$dog = $get_dam_3_2->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_3_2_id = $dog->ID;
+
+												// To array - pokolenie 3
+												$sire_pedigree_arr[3][2] = $dam_3_2_id ;
+
 												$dog_color = get_post_meta( $dam_3_2_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -263,6 +284,10 @@ get_header(); ?>
 												$dog = $get_sire_3_3->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_3_3_id = $dog->ID;
+
+												// To array - pokolenie 3
+												$sire_pedigree_arr[3][3] = $sire_3_3_id ;
+
 												$dog_color = get_post_meta( $sire_3_3_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -304,6 +329,11 @@ get_header(); ?>
 												$dog = $get_dam_3_4->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_3_4_id = $dog->ID;
+
+												// To array - pokolenie 3
+												$sire_pedigree_arr[3][4] = $dam_3_4_id ;
+
+
 												$dog_color = get_post_meta( $dam_3_4_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -347,6 +377,10 @@ get_header(); ?>
 												$dog = $get_sire_4_1->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_4_1_id = $dog->ID;
+
+												// To array - pokolenie 4
+												$sire_pedigree_arr[4][1] = $sire_4_1_id ;
+
 												$dog_color = get_post_meta( $sire_4_1_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -387,6 +421,10 @@ get_header(); ?>
 												$dog = $get_dam_4_2->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_4_2_id = $dog->ID;
+
+												// To array - pokolenie 4
+												$sire_pedigree_arr[4][2] = $dam_4_2_id ;
+
 												$dog_color = get_post_meta( $dam_4_2_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -427,6 +465,10 @@ get_header(); ?>
 												$dog = $get_sire_4_3->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_4_3_id = $dog->ID;
+
+												// To array - pokolenie 4
+												$sire_pedigree_arr[4][3] = $sire_4_3_id ;
+
 												$dog_color = get_post_meta( $sire_4_3_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -467,6 +509,10 @@ get_header(); ?>
 												$dog = $get_dam_4_4->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_4_4_id = $dog->ID;
+
+												// To array - pokolenie 4
+												$sire_pedigree_arr[4][4] = $dam_4_4_id ;
+
 												$dog_color = get_post_meta( $dam_4_4_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -507,6 +553,10 @@ get_header(); ?>
 												$dog = $get_sire_4_5->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_4_5_id = $dog->ID;
+
+												// To array - pokolenie 4
+												$sire_pedigree_arr[4][5] = $sire_4_5_id ;
+
 												$dog_color = get_post_meta( $sire_4_5_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -547,6 +597,10 @@ get_header(); ?>
 												$dog = $get_dam_4_6->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_4_6_id = $dog->ID;
+
+												// To array - pokolenie 4
+												$sire_pedigree_arr[4][6] = $dam_4_6_id ;
+
 												$dog_color = get_post_meta( $dam_4_6_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -587,6 +641,10 @@ get_header(); ?>
 												$dog = $get_sire_4_7->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_4_7_id = $dog->ID;
+
+												// To array - pokolenie 4
+												$sire_pedigree_arr[4][7] = $sire_4_7_id ;
+
 												$dog_color = get_post_meta( $sire_4_7_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -627,6 +685,10 @@ get_header(); ?>
 												$dog = $get_dam_4_8->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_4_8_id = $dog->ID;
+
+												// To array - pokolenie 4
+												$sire_pedigree_arr[4][8] = $dam_4_8_id ;
+
 												$dog_color = get_post_meta( $dam_4_8_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -670,6 +732,10 @@ get_header(); ?>
 												$dog = $get_sire_5_1->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_5_1_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][1] = $sire_5_1_id ;
+
 												$dog_color = get_post_meta( $sire_5_1_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -710,6 +776,10 @@ get_header(); ?>
 												$dog = $get_dam_5_2->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_5_2_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][2] = $dam_5_2_id ;
+
 												$dog_color = get_post_meta( $dam_5_2_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -750,6 +820,11 @@ get_header(); ?>
 												$dog = $get_sire_5_3->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_5_3_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][3] = $sire_5_3_id ;
+
+
 												$dog_color = get_post_meta( $sire_5_3_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -790,6 +865,10 @@ get_header(); ?>
 												$dog = $get_dam_5_4->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_5_4_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][4] = $dam_5_4_id ;
+
 												$dog_color = get_post_meta( $dam_5_4_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -830,6 +909,10 @@ get_header(); ?>
 												$dog = $get_sire_5_5->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_5_5_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][5] = $sire_5_5_id ;
+
 												$dog_color = get_post_meta( $sire_5_5_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -870,6 +953,10 @@ get_header(); ?>
 												$dog = $get_dam_5_6->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_5_6_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][6] = $dam_5_6_id ;
+
 												$dog_color = get_post_meta( $dam_5_6_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -910,6 +997,10 @@ get_header(); ?>
 												$dog = $get_sire_5_7->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_5_7_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][7] = $sire_5_7_id ;
+
 												$dog_color = get_post_meta( $sire_5_7_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -950,6 +1041,10 @@ get_header(); ?>
 												$dog = $get_dam_5_8->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_5_8_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][8] = $dam_5_8_id ;
+
 												$dog_color = get_post_meta( $dam_5_8_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -990,6 +1085,10 @@ get_header(); ?>
 												$dog = $get_sire_5_9->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_5_9_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][9] = $sire_5_9_id ;
+
 												$dog_color = get_post_meta( $sire_5_9_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -1030,6 +1129,10 @@ get_header(); ?>
 												$dog = $get_dam_5_10->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_5_10_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][10] = $dam_5_10_id ;
+
 												$dog_color = get_post_meta( $dam_5_10_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -1070,6 +1173,10 @@ get_header(); ?>
 												$dog = $get_sire_5_11->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_5_11_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][11] = $sire_5_11_id ;
+
 												$dog_color = get_post_meta( $sire_5_11_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -1110,6 +1217,10 @@ get_header(); ?>
 												$dog = $get_dam_5_12->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_5_12_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][12] = $dam_5_12_id ;
+
 												$dog_color = get_post_meta( $dam_5_12_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -1150,6 +1261,10 @@ get_header(); ?>
 												$dog = $get_sire_5_13->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_5_13_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][13] = $sire_5_13_id ;
+
 												$dog_color = get_post_meta( $sire_5_13_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -1191,6 +1306,10 @@ get_header(); ?>
 												$dog = $get_dam_5_14->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_5_14_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][14] = $dam_5_14_id ;
+
 												$dog_color = get_post_meta( $dam_5_14_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -1231,6 +1350,10 @@ get_header(); ?>
 												$dog = $get_sire_5_15->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$sire_5_15_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][15] = $sire_5_15_id ;
+
 												$dog_color = get_post_meta( $sire_5_15_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -1271,6 +1394,10 @@ get_header(); ?>
 												$dog = $get_dam_5_16->posts[0];
 												$permalink = get_permalink($dog->ID);
 												$dam_5_16_id = $dog->ID;
+
+												// To array - pokolenie 5
+												$sire_pedigree_arr[5][16] = $dam_5_16_id ;
+
 												$dog_color = get_post_meta( $dam_5_16_id , 'dog_color' , true);
 												echo '<div class="dog-cell-inner dog-color-'.$dog->ID.' " style="background:'.$dog_color.'">';
 												echo '<div class="dog-cell-card">';
@@ -1309,6 +1436,14 @@ get_header(); ?>
 		<!-- Sire pedigree end -->
 
 		<?php include get_template_directory().'/template-parts/vp-dam-pedigree.php' ?>
+
+		<div class="inbreed-val">
+			<?php 
+			echo '<pre>';
+			print_r($sire_pedigree_arr);
+			echo '</pre>';
+			?>
+		</div>
 
 
 		
