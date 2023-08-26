@@ -65,7 +65,7 @@ get_header(); ?>
 												$permalink = get_permalink($dog->ID);
 												$sire_1_id = $dog->ID;
 
-												// To array - index 1
+												// To array - pokolenie 1
 												$sire_pedigree_arr[1] = $sire_1_id;
 
 												$dog_color = get_post_meta( $sire_1_id , 'dog_color' , true);
@@ -1440,7 +1440,7 @@ get_header(); ?>
 		<div class="inbreed-val">
 			<?php 
 			echo '<pre>';
-			print_r($sire_pedigree_arr);
+			print_r($dam_pedigree_arr);
 			echo '</pre>';
 			?>
 		</div>
