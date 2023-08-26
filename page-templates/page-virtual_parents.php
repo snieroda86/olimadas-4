@@ -8,12 +8,15 @@ if( !array_key_exists('sire' , $_GET) && !array_key_exists('dam' , $_GET)){
 
 $sire_vp_name = $_GET['sire'];
 $dam_vp_name = $_GET['dam'];
+$sire_vp_id = get_page_by_title($sire_vp_name , OBJECT , 'rodowody_psow')->ID;
+$dam_vp_id = get_page_by_title($dam_vp_name , OBJECT , 'rodowody_psow')->ID;
+
 
 get_header(); ?>
 
 <main id="primary" class="site-main">
 	<?php  get_template_part( 'template-parts/page', 'header' ); ?>
-	<div class="container-lg page-container-sn">
+	<div class="container-lg page-container-sn pt-5">
 
 		<?php
 		while ( have_posts() ) :
@@ -34,6 +37,14 @@ get_header(); ?>
 
         			// Variables
         			$c_parent_url = get_permalink(89);
+
+        			$sire_pedigree_arr =[];
+
+        			echo '<pre>';
+        			print_r($sire_pedigree_arr);
+        			echo '</pre>';
+
+
         			?>
 
                 	<table class="table-bordered">
@@ -44,9 +55,9 @@ get_header(); ?>
                 					<!-- Sire 1 -->
 
                 					<?php 
-                						$sire_1 = &$sire_vp_name;
+                						$sire_1 = &$sire_vp_id;
                 						if($sire_1){
-                							$get_sire_1 = getDogByTitleSN($sire_1);
+                							$get_sire_1 = getDogByID($sire_1);
                 							if ( $get_sire_1->have_posts() ) {
 												
 												$dog = $get_sire_1->posts[0];
@@ -82,7 +93,7 @@ get_header(); ?>
                 					if( isset($sire_1_id) ){
                 						$sire_2_1 = get_field('ojciec_sire' , $sire_1_id);
                 						if($sire_2_1){
-                							$get_sire_2_1 = getDogByTitleSN($sire_2_1);
+                							$get_sire_2_1 = getDogByID($sire_2_1);
                 							if ( $get_sire_2_1->have_posts() ) {
 												
 												$dog = $get_sire_2_1->posts[0];
@@ -122,7 +133,7 @@ get_header(); ?>
                 					if( isset($sire_1_id) ){
                 						$dam_2_2 = get_field('matka_dam' , $sire_1_id);
                 						if($dam_2_2){
-                							$get_dam_2_2 = getDogByTitleSN($dam_2_2);
+                							$get_dam_2_2 = getDogByID($dam_2_2);
                 							if ( $get_dam_2_2->have_posts() ) {
 												
 												$dog = $get_dam_2_2->posts[0];
@@ -165,7 +176,7 @@ get_header(); ?>
                 					if( isset($sire_2_1_id) ){
                 						$sire_3_1 = get_field('ojciec_sire' , $sire_2_1_id);
                 						if($sire_3_1){
-                							$get_sire_3_1 = getDogByTitleSN($sire_3_1);
+                							$get_sire_3_1 = getDogByID($sire_3_1);
                 							if ( $get_sire_3_1->have_posts() ) {
 												
 												$dog = $get_sire_3_1->posts[0];
@@ -206,7 +217,7 @@ get_header(); ?>
                 					if( isset($sire_2_1_id) ){
                 						$dam_3_2 = get_field('matka_dam' , $sire_2_1_id);
                 						if($dam_3_2){
-                							$get_dam_3_2 = getDogByTitleSN($dam_3_2);
+                							$get_dam_3_2 = getDogByID($dam_3_2);
                 							if ( $get_dam_3_2->have_posts() ) {
 												
 												$dog = $get_dam_3_2->posts[0];
@@ -246,7 +257,7 @@ get_header(); ?>
                 					if( isset($dam_2_2_id) ){
                 						$sire_3_3 = get_field('ojciec_sire' , $dam_2_2_id);
                 						if($sire_3_3){
-                							$get_sire_3_3 = getDogByTitleSN($sire_3_3);
+                							$get_sire_3_3 = getDogByID($sire_3_3);
                 							if ( $get_sire_3_3->have_posts() ) {
 												
 												$dog = $get_sire_3_3->posts[0];
@@ -287,7 +298,7 @@ get_header(); ?>
                 					if( isset($dam_2_2_id) ){
                 						$dam_3_4 = get_field('matka_dam' , $dam_2_2_id);
                 						if($dam_3_4){
-                							$get_dam_3_4 = getDogByTitleSN($dam_3_4);
+                							$get_dam_3_4 = getDogByID($dam_3_4);
                 							if ( $get_dam_3_4->have_posts() ) {
 												
 												$dog = $get_dam_3_4->posts[0];
@@ -330,7 +341,7 @@ get_header(); ?>
                 					if( isset($sire_3_1_id) ){
                 						$sire_4_1 = get_field('ojciec_sire' , $sire_3_1_id);
                 						if($sire_4_1){
-                							$get_sire_4_1 = getDogByTitleSN($sire_4_1);
+                							$get_sire_4_1 = getDogByID($sire_4_1);
                 							if ( $get_sire_4_1->have_posts() ) {
 												
 												$dog = $get_sire_4_1->posts[0];
@@ -370,7 +381,7 @@ get_header(); ?>
                 					if( isset($sire_3_1_id) ){
                 						$dam_4_2 = get_field('matka_dam' , $sire_3_1_id);
                 						if($dam_4_2){
-                							$get_dam_4_2 = getDogByTitleSN($dam_4_2);
+                							$get_dam_4_2 = getDogByID($dam_4_2);
                 							if ( $get_dam_4_2->have_posts() ) {
 												
 												$dog = $get_dam_4_2->posts[0];
@@ -410,7 +421,7 @@ get_header(); ?>
                 					if( isset($dam_3_2_id) ){
                 						$sire_4_3 = get_field('ojciec_sire' , $dam_3_2_id);
                 						if($sire_4_3){
-                							$get_sire_4_3 = getDogByTitleSN($sire_4_3);
+                							$get_sire_4_3 = getDogByID($sire_4_3);
                 							if ( $get_sire_4_3->have_posts() ) {
 												
 												$dog = $get_sire_4_3->posts[0];
@@ -450,7 +461,7 @@ get_header(); ?>
                 					if( isset($dam_3_2_id) ){
                 						$dam_4_4 = get_field('matka_dam' , $dam_3_2_id);
                 						if($dam_4_4){
-                							$get_dam_4_4 = getDogByTitleSN($dam_4_4);
+                							$get_dam_4_4 = getDogByID($dam_4_4);
                 							if ( $get_dam_4_4->have_posts() ) {
 												
 												$dog = $get_dam_4_4->posts[0];
@@ -490,7 +501,7 @@ get_header(); ?>
                 					if( isset($sire_3_3_id) ){
                 						$sire_4_5 = get_field('ojciec_sire' , $sire_3_3_id);
                 						if($sire_4_5){
-                							$get_sire_4_5 = getDogByTitleSN($sire_4_5);
+                							$get_sire_4_5 = getDogByID($sire_4_5);
                 							if ( $get_sire_4_5->have_posts() ) {
 												
 												$dog = $get_sire_4_5->posts[0];
@@ -530,7 +541,7 @@ get_header(); ?>
                 					if( isset($sire_3_3_id) ){
                 						$dam_4_6 = get_field('matka_dam' , $sire_3_3_id);
                 						if($dam_4_6){
-                							$get_dam_4_6 = getDogByTitleSN($dam_4_6);
+                							$get_dam_4_6 = getDogByID($dam_4_6);
                 							if ( $get_dam_4_6->have_posts() ) {
 												
 												$dog = $get_dam_4_6->posts[0];
@@ -570,7 +581,7 @@ get_header(); ?>
                 					if( isset($dam_3_4_id) ){
                 						$sire_4_7 = get_field('ojciec_sire' , $dam_3_4_id);
                 						if($sire_4_7){
-                							$get_sire_4_7 = getDogByTitleSN($sire_4_7);
+                							$get_sire_4_7 = getDogByID($sire_4_7);
                 							if ( $get_sire_4_7->have_posts() ) {
 												
 												$dog = $get_sire_4_7->posts[0];
@@ -610,7 +621,7 @@ get_header(); ?>
                 					if( isset($dam_3_4_id) ){
                 						$dam_4_8 = get_field('matka_dam' , $dam_3_4_id);
                 						if($dam_4_8){
-                							$get_dam_4_8 = getDogByTitleSN($dam_4_8);
+                							$get_dam_4_8 = getDogByID($dam_4_8);
                 							if ( $get_dam_4_8->have_posts() ) {
 												
 												$dog = $get_dam_4_8->posts[0];
@@ -653,7 +664,7 @@ get_header(); ?>
                 					if( isset($sire_4_1_id) ){
                 						$sire_5_1 = get_field('ojciec_sire' , $sire_4_1_id);
                 						if($sire_5_1){
-                							$get_sire_5_1 = getDogByTitleSN($sire_5_1);
+                							$get_sire_5_1 = getDogByID($sire_5_1);
                 							if ( $get_sire_5_1->have_posts() ) {
 												
 												$dog = $get_sire_5_1->posts[0];
@@ -693,7 +704,7 @@ get_header(); ?>
                 					if( isset($sire_4_1_id) ){
                 						$dam_5_2 = get_field('matka_dam' , $sire_4_1_id);
                 						if($dam_5_2){
-                							$get_dam_5_2 = getDogByTitleSN($dam_5_2);
+                							$get_dam_5_2 = getDogByID($dam_5_2);
                 							if ( $get_dam_5_2->have_posts() ) {
 												
 												$dog = $get_dam_5_2->posts[0];
@@ -733,7 +744,7 @@ get_header(); ?>
                 					if( isset($dam_4_2_id) ){
                 						$sire_5_3 = get_field('ojciec_sire' , $dam_4_2_id);
                 						if($sire_5_3){
-                							$get_sire_5_3 = getDogByTitleSN($sire_5_3);
+                							$get_sire_5_3 = getDogByID($sire_5_3);
                 							if ( $get_sire_5_3->have_posts() ) {
 												
 												$dog = $get_sire_5_3->posts[0];
@@ -773,7 +784,7 @@ get_header(); ?>
                 					if( isset($dam_4_2_id) ){
                 						$dam_5_4 = get_field('matka_dam' , $dam_4_2_id);
                 						if($dam_5_4){
-                							$get_dam_5_4 = getDogByTitleSN($dam_5_4);
+                							$get_dam_5_4 = getDogByID($dam_5_4);
                 							if ( $get_dam_5_4->have_posts() ) {
 												
 												$dog = $get_dam_5_4->posts[0];
@@ -813,7 +824,7 @@ get_header(); ?>
                 					if( isset($sire_4_3_id) ){
                 						$sire_5_5 = get_field('ojciec_sire' , $sire_4_3_id);
                 						if($sire_5_5){
-                							$get_sire_5_5 = getDogByTitleSN($sire_5_5);
+                							$get_sire_5_5 = getDogByID($sire_5_5);
                 							if ( $get_sire_5_5->have_posts() ) {
 												
 												$dog = $get_sire_5_5->posts[0];
@@ -853,7 +864,7 @@ get_header(); ?>
                 					if( isset($sire_4_3_id) ){
                 						$dam_5_6 = get_field('matka_dam' , $sire_4_3_id);
                 						if($dam_5_6){
-                							$get_dam_5_6 = getDogByTitleSN($dam_5_6);
+                							$get_dam_5_6 = getDogByID($dam_5_6);
                 							if ( $get_dam_5_6->have_posts() ) {
 												
 												$dog = $get_dam_5_6->posts[0];
@@ -893,7 +904,7 @@ get_header(); ?>
                 					if( isset($dam_4_4_id) ){
                 						$sire_5_7 = get_field('ojciec_sire' , $dam_4_4_id);
                 						if($sire_5_7){
-                							$get_sire_5_7 = getDogByTitleSN($sire_5_7);
+                							$get_sire_5_7 = getDogByID($sire_5_7);
                 							if ( $get_sire_5_7->have_posts() ) {
 												
 												$dog = $get_sire_5_7->posts[0];
@@ -933,7 +944,7 @@ get_header(); ?>
                 					if( isset($dam_4_4_id) ){
                 						$dam_5_8 = get_field('matka_dam' , $dam_4_4_id);
                 						if($dam_5_8){
-                							$get_dam_5_8 = getDogByTitleSN($dam_5_8);
+                							$get_dam_5_8 = getDogByID($dam_5_8);
                 							if ( $get_dam_5_8->have_posts() ) {
 												
 												$dog = $get_dam_5_8->posts[0];
@@ -973,7 +984,7 @@ get_header(); ?>
                 					if( isset($sire_4_5_id) ){
                 						$sire_5_9 = get_field('ojciec_sire' , $sire_4_5_id);
                 						if($sire_5_9){
-                							$get_sire_5_9 = getDogByTitleSN($sire_5_9);
+                							$get_sire_5_9 = getDogByID($sire_5_9);
                 							if ( $get_sire_5_9->have_posts() ) {
 												
 												$dog = $get_sire_5_9->posts[0];
@@ -1013,7 +1024,7 @@ get_header(); ?>
                 					if( isset($sire_4_5_id) ){
                 						$dam_5_10 = get_field('matka_dam' , $sire_4_5_id);
                 						if($dam_5_10){
-                							$get_dam_5_10 = getDogByTitleSN($dam_5_10);
+                							$get_dam_5_10 = getDogByID($dam_5_10);
                 							if ( $get_dam_5_10->have_posts() ) {
 												
 												$dog = $get_dam_5_10->posts[0];
@@ -1053,7 +1064,7 @@ get_header(); ?>
                 					if( isset($dam_4_6_id) ){
                 						$sire_5_11 = get_field('ojciec_sire' , $dam_4_6_id);
                 						if($sire_5_11){
-                							$get_sire_5_11 = getDogByTitleSN($sire_5_11);
+                							$get_sire_5_11 = getDogByID($sire_5_11);
                 							if ( $get_sire_5_11->have_posts() ) {
 												
 												$dog = $get_sire_5_11->posts[0];
@@ -1093,7 +1104,7 @@ get_header(); ?>
                 					if( isset($dam_4_6_id) ){
                 						$dam_5_12 = get_field('matka_dam' , $dam_4_6_id);
                 						if($dam_5_12){
-                							$get_dam_5_12 = getDogByTitleSN($dam_5_12);
+                							$get_dam_5_12 = getDogByID($dam_5_12);
                 							if ( $get_dam_5_12->have_posts() ) {
 												
 												$dog = $get_dam_5_12->posts[0];
@@ -1133,7 +1144,7 @@ get_header(); ?>
                 					if( isset($sire_4_7_id) ){
                 						$sire_5_13 = get_field('ojciec_sire' , $sire_4_7_id);
                 						if($sire_5_13){
-                							$get_sire_5_13 = getDogByTitleSN($sire_5_13);
+                							$get_sire_5_13 = getDogByID($sire_5_13);
                 							if ( $get_sire_5_13->have_posts() ) {
 												
 												$dog = $get_sire_5_13->posts[0];
@@ -1174,7 +1185,7 @@ get_header(); ?>
                 					if( isset($sire_4_7_id) ){
                 						$dam_5_14 = get_field('matka_dam' , $sire_4_7_id);
                 						if($dam_5_14){
-                							$get_dam_5_14 = getDogByTitleSN($dam_5_14);
+                							$get_dam_5_14 = getDogByID($dam_5_14);
                 							if ( $get_dam_5_14->have_posts() ) {
 												
 												$dog = $get_dam_5_14->posts[0];
@@ -1214,7 +1225,7 @@ get_header(); ?>
                 					if( isset($dam_4_8_id) ){
                 						$sire_5_15 = get_field('ojciec_sire' , $dam_4_8_id);
                 						if($sire_5_15){
-                							$get_sire_5_15 = getDogByTitleSN($sire_5_15);
+                							$get_sire_5_15 = getDogByID($sire_5_15);
                 							if ( $get_sire_5_15->have_posts() ) {
 												
 												$dog = $get_sire_5_15->posts[0];
@@ -1254,7 +1265,7 @@ get_header(); ?>
                 					if( isset($dam_4_8_id) ){
                 						$dam_5_16 = get_field('matka_dam' , $dam_4_8_id);
                 						if($dam_5_16){
-                							$get_dam_5_16 = getDogByTitleSN($dam_5_16);
+                							$get_dam_5_16 = getDogByID($dam_5_16);
                 							if ( $get_dam_5_16->have_posts() ) {
 												
 												$dog = $get_dam_5_16->posts[0];

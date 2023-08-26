@@ -88,7 +88,7 @@ $hodoJSON = json_encode( $hodoArr);
 
 	<main id="primary" class="site-main">
 		<?php  get_template_part( 'template-parts/page', 'header' ); ?>
-        <div class="container-lg page-container-sn">
+        <div class="container-lg page-container-sn pt-5">
         <?php if(is_user_logged_in()): ?>
             
 					<?php

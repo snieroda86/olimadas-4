@@ -643,7 +643,7 @@ get_header();
             if (foundCountryBreeder) {
                 var countryCodeBreeder = foundCountryBreeder.value;
                
-                 window.addEventListener('load', (event) => {
+                window.addEventListener('load', (event) => {
                     breederCountry.setValue(countryCodeBreeder);
                 });
 

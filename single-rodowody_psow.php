@@ -89,6 +89,7 @@ get_header();
                         	<tr>
                         		<th><?php _e('DAM' , 'web14devsn'); ?></th>
                         		<td>
+
                         			<?php 
                         			$dam_id = get_field('matka_dam'); 
 
@@ -196,10 +197,29 @@ get_header();
 	                                   				?>
 	                                   				<?php if($current_dog_gender == 'male'): ?>
 	                                   					<span class="pr-2"><?php _e('DAM:' , 'web14devsn'); ?></span>
-	                                   					<span><?php the_field('matka_dam' , $child->ID ); ?></span>
+	                                   					<span>
+
+	                                   						<?php 
+	                                   						$dam_id = get_field('matka_dam' , $child->ID ); 
+	                                   						if(!empty($dam_id)){
+	                                   							$dam_name = get_post($dam_id)->post_title;
+	                                   							echo $dam_name;
+	                                   						}
+	                                   						?>
+	                                   							
+	                                   						</span>
 	                                   				<?php else: ?>
 	                                   					<span class="pr-2"><?php _e('SIRE:' , 'web14devsn'); ?></span>
-	                                   					<span><?php the_field('ojciec_sire' , $child->ID ); ?></span>
+	                                   					<span>
+		                                   					<?php 
+		                                   					$sire_id = get_field('ojciec_sire' , $child->ID );
+		                                   					if(!empty($sire_id)){
+	                                   							$sire_name = get_post($sire_id)->post_title;
+	                                   							echo $sire_name;
+	                                   						} 
+		                                   					?>
+	                                   					
+	                                   					</span>
 	                                   				<?php endif; ?>
 	                                   				
 	                                   			</div>
@@ -292,7 +312,7 @@ get_header();
 
 	                    	<table class="table-bordered">
 	                    		<tr>
-	                    			<!-- col 1 -->
+	                    			<!-- col 1 -->  
 	                    			<td>
 	                    				<div class="dog-cell dog-cell-1">
 	                    					<!-- Sire 1 -->

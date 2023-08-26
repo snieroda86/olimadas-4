@@ -19,16 +19,17 @@ $damJSON_VP = json_encode($damArr_VP);
         </button>
       </div>
       <div class="modal-body">
+
         <form class="one-line-border-form"  action="<?php echo get_permalink(124) ?>" method="get">
            <!-- Sire -->
           <div class="form-group mb-4">
               <label for="sire">Sire</label>
-              <input type="text" name="sire"  class="form-control" id="sire" placeholder="Search for sire" required>
+              <input type="text" name="sire"  class="form-control" id="sire-vp" placeholder="Search for sire" required>
           </div>
           <!-- Dam -->
           <div class="form-group mb-4">
               <label for="dam">Dam</label>
-              <input type="text" name="dam" class="form-control" id="dam" placeholder="Search for dam" required>
+              <input type="text" name="dam" class="form-control" id="dam-vp" placeholder="Search for dam" required>
           </div>
           <div>
             <input type="submit" name="show_virtual_parent" value="Show" class=" btn-gold text-white btn-main-sn">
@@ -46,13 +47,13 @@ $damJSON_VP = json_encode($damArr_VP);
   jQuery(document).ready(function($) {
        // Sire autocomplete
       var sireListVP = <?php echo $sireJSON_VP; ?>;
-      $( "#sire" ).autocomplete({
+      $( "#sire-vp" ).autocomplete({
          source: sireListVP
       });
 
       // Dam autocomplete
       var damListVP = <?php echo $damJSON_VP; ?>;
-      $( "#dam" ).autocomplete({
+      $( "#dam-vp" ).autocomplete({
          source: damListVP
       });
   })
